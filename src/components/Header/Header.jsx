@@ -3,15 +3,17 @@ import { AuthContext } from '../../context/AuthProvider';
 import { Link, NavLink } from 'react-router-dom';
 
 const Header = () => {
-    const {name} = useContext(AuthContext);
-    console.log(name);
+    
     const navLink = <>
-    <li><NavLink to="/">Home</NavLink></li>
-    <li><NavLink to="/login">Login</NavLink></li>
-    <li><NavLink to="/register">Register</NavLink></li>
+        <li><NavLink to="/">Home</NavLink></li>
+        <li><NavLink to="/login">Login</NavLink></li>
+        <li><NavLink to="/register">Register</NavLink></li>
+        <li><NavLink to="/profileUpdate">Update Profile</NavLink></li>
+        <li><NavLink to="/profile">User Profile</NavLink></li>
     </>
     return (
         <div className="navbar bg-base-100">
+            
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -21,7 +23,7 @@ const Header = () => {
                         {navLink}
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-xl">daisyUI</a>
+                <a className="btn btn-ghost text-xl">Luxury Estate</a>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">

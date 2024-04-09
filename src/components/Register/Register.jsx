@@ -1,9 +1,68 @@
-import React from 'react';
+import { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthProvider';
+import { updateProfile } from 'firebase/auth';
 
 const Register = () => {
+    const authInfo = useContext(AuthContext);
+    const { user, createUser } = authInfo;
+    const handleRegister = (e) => {
+        e.preventDefault();
+        const form = new FormData(e.currentTarget);
+        const name = form.get('name');
+        const email = form.get('email');
+        const photoUrl = form.get('photo');
+        const password = form.get('password');
+        console.log(name, email, photoUrl, password);
+        createUser(email, password,name,photoUrl)
+            .then(res => {
+                updateProfile(res.user,{
+                    displayName: name, photoURL: photoUrl
+                })
+                console.log(res.user);
+
+            })
+            .catch(err => {
+                console.log(err);
+            })
+
+    }
     return (
-        <div>
-            <h1>this is register</h1>
+        <div className=" max-w-lg mx-auto bg-base-200">
+            <form onSubmit={handleRegister} className="card-body">
+                <div className="form-control">
+                    <label className="label">
+                        <span className="label-text">Name</span>
+                    </label>
+                    <input type="text" name='name' placeholder="name" className="input input-bordered" required />
+                </div>
+                <div className="form-control">
+                    <label className="label">
+                        <span className="label-text">Email</span>
+                    </label>
+                    <input type="email" name='email' placeholder="email" className="input input-bordered" required />
+                </div>
+                <div className="form-control">
+                    <label className="label">
+                        <span className="label-text">Photo Url</span>
+                    </label>
+                    <input type="text" name='photo' placeholder="Photo" className="input input-bordered" required />
+                </div>
+                <div className="form-control">
+                    <label className="label">
+                        <span className="label-text">Password</span>
+                    </label>
+                    <input type="password" name='password' placeholder="password" className="input input-bordered" required />
+                </div>
+                <div>
+                    <label className="label">
+                        <p>Already have account ? Please <Link to="/login" className="text-blue-500 link link-hover">Login</Link> </p>
+                    </label>
+                </div>
+                <div className="form-control mt-6">
+                    <button className="btn btn-primary">Login</button>
+                </div>
+            </form>
         </div>
     );
 };
