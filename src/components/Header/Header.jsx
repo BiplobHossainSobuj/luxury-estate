@@ -3,7 +3,9 @@ import { AuthContext } from '../../context/AuthProvider';
 import { Link, NavLink } from 'react-router-dom';
 
 const Header = () => {
-    
+    const authInfo = useContext(AuthContext);
+    const {user} = authInfo;
+    console.log(user);
     const navLink = <>
         <li><NavLink to="/">Home</NavLink></li>
         <li><NavLink to="/login">Login</NavLink></li>
@@ -31,7 +33,16 @@ const Header = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <Link to='/login'><button className="btn btn-outline btn-success">Login</button></Link>
+                
+                {
+                  user ?  
+                  <>
+                    <img className={`w-10 mr-2 rounded-full hover:cursor-pointer,${user.displayName}`} alt="Tailwind CSS Navbar component" src={user?.photoURL} /> 
+                   <button className="btn btn-outline btn-success">Log Out</button>
+                  </>:
+                  <Link to='/login'><button className="btn btn-outline btn-success">Login</button></Link>
+
+                }
             </div>
         </div>
     );
