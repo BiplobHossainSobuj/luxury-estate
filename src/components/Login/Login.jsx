@@ -44,7 +44,7 @@ const Login = () => {
                     </div>
                     <div>
                         <label className="label">
-                            <p>New to the website ? Please <Link to="/login" className="text-blue-500 link link-hover">Register</Link> </p>
+                            <p>New to the website ? Please <Link to="/register" className="text-blue-500 link link-hover">Register</Link> </p>
                         </label>
                     </div>
                     <div className="form-control mt-6">

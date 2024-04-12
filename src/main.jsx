@@ -11,6 +11,9 @@ import Home from './components/Home/Home.jsx'
 import Login from './components/Login/Login.jsx'
 import Register from './components/Register/Register.jsx'
 import Root from './components/Roots/Root.jsx'
+import UpdateProfile from './components/UpdateProfile/UpdateProfile.jsx'
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute.jsx'
+import UserProfile from './components/UserProfile/UserProfile.jsx'
 const router = createBrowserRouter([
   {
     path: "/",
@@ -27,6 +30,14 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register></Register>,
+      },
+      {
+        path: "/profileUpdate",
+        element: <ProtectedRoute><UpdateProfile></UpdateProfile></ProtectedRoute>,
+      },
+      {
+        path: "/profile",
+        element: <ProtectedRoute><UserProfile></UserProfile></ProtectedRoute>,
       },
     ]
   }
