@@ -1,11 +1,20 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../context/AuthProvider';
 import { Link, NavLink } from 'react-router-dom';
 
 const Header = () => {
     const authInfo = useContext(AuthContext);
-    const {user} = authInfo;
-    console.log(user);
+    const { user,logOut } = authInfo;
+    const [name, setName] = useState(null);
+    const handleLogout=()=>{
+        logOut()
+        .then(()=>{
+            console.log('logout');
+        })
+        .catch((err)=>{
+            console.log('log out error',err)
+        })
+    }
     const navLink = <>
         <li><NavLink to="/">Home</NavLink></li>
         <li><NavLink to="/login">Login</NavLink></li>
@@ -15,7 +24,7 @@ const Header = () => {
     </>
     return (
         <div className="navbar bg-base-100">
-            
+
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -33,14 +42,16 @@ const Header = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                
+
                 {
-                  user ?  
-                  <>
-                    <img className={`w-10 mr-2 rounded-full hover:cursor-pointer,${user.displayName}`} alt="Tailwind CSS Navbar component" src={user?.photoURL} /> 
-                   <button className="btn btn-outline btn-success">Log Out</button>
-                  </>:
-                  <Link to='/login'><button className="btn btn-outline btn-success">Login</button></Link>
+                    user ?
+                        <>
+                            <div className="tooltip tooltip-left" data-tip={name}>
+                                <img onMouseOver={() => setName(user.displayName)} className='w-10 mr-2 rounded-full hover:cursor-pointer' alt="user" src={user?.photoURL} />
+                            </div>
+                            <button onClick={handleLogout} className="btn btn-outline btn-success">Log Out</button>
+                        </> :
+                        <Link to='/login'><button className="btn btn-outline btn-success">Login</button></Link>
 
                 }
             </div>
