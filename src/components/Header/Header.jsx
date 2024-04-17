@@ -17,9 +17,10 @@ const Header = () => {
     }
     const navLink = <>
         <li><NavLink to="/">Home</NavLink></li>
-        
+        <li><NavLink to="/favourite">Favourite Estates</NavLink></li>
         <li><NavLink to="/profileUpdate">Update Profile</NavLink></li>
         <li><NavLink to="/profile">User Profile</NavLink></li>
+        <li><NavLink to="/about">About Us</NavLink></li>
     </>
     return (
         <div className="navbar bg-base-100">

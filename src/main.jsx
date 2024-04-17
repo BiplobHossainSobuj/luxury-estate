@@ -14,14 +14,23 @@ import Root from './components/Roots/Root.jsx'
 import UpdateProfile from './components/UpdateProfile/UpdateProfile.jsx'
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute.jsx'
 import UserProfile from './components/UserProfile/UserProfile.jsx'
+import EstateDetails from './components/EstateDetails/EstateDetails.jsx'
+import NotFound from './components/NotFound/NotFound.jsx'
+import About from './components/About/About.jsx'
+import Favourite from './components/Favourite/Favourite.jsx'
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
+    errorElement:<NotFound></NotFound>,
     children: [
       {
         path: "/",
         element: <Home></Home>,
+      },
+      {
+        path: "/about",
+        element: <About></About>,
       },
       {
         path: "/login",
@@ -38,6 +47,14 @@ const router = createBrowserRouter([
       {
         path: "/profile",
         element: <ProtectedRoute><UserProfile></UserProfile></ProtectedRoute>,
+      },
+      {
+        path: "/favourite",
+        element: <ProtectedRoute><Favourite></Favourite></ProtectedRoute>,
+      },
+      {
+        path: "/estate/:id",
+        element: <ProtectedRoute><EstateDetails></EstateDetails></ProtectedRoute>,
       },
     ]
   }
