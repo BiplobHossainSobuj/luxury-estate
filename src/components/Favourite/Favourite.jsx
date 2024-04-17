@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { useLoaderData } from "react-router-dom";
 import { getFavouriteEstates } from "../utility/localStorage";
+import FavouriteEstate from "./FavouriteEstate";
 
 const Favourite = () => {
     const allProperties = useLoaderData();
@@ -20,14 +21,13 @@ const Favourite = () => {
         }
     }, [allProperties]);
     return (
-        <div>
+        <div className="space-y-4">
             <Helmet>
                 <title>Favorite Estates</title>
                 <meta name="description" content="Helmet application" />
             </Helmet>
-        <h1>{properties.length}</h1>
         {
-            properties.map(property=><li key={property.id} >{property.estate_title}</li>)
+            properties.map(property=><FavouriteEstate estate={property} key={property.id} ></FavouriteEstate>)
         }
         </div>
     );

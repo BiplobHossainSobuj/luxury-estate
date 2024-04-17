@@ -46,7 +46,7 @@ const Header = () => {
                     user ?
                         <>
                             <div className="tooltip tooltip-left" data-tip={name}>
-                                <img onMouseOver={() => setName(user.displayName)} className='w-10 mr-2 rounded-full hover:cursor-pointer' alt="user" src={user?.photoURL} />
+                                <img onMouseOver={() => setName(user.displayName)} className='w-10 mr-2 rounded-full hover:cursor-pointer' alt="user" src={user.photoURL} />
                             </div>
                             <button onClick={handleLogout} className="btn btn-outline btn-success">Log Out</button>
                         </> :
