@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 import AuthProvider from './context/AuthProvider.jsx'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -13,7 +15,6 @@ import Register from './components/Register/Register.jsx'
 import Root from './components/Roots/Root.jsx'
 import UpdateProfile from './components/UpdateProfile/UpdateProfile.jsx'
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute.jsx'
-import UserProfile from './components/UserProfile/UserProfile.jsx'
 import EstateDetails from './components/EstateDetails/EstateDetails.jsx'
 import NotFound from './components/NotFound/NotFound.jsx'
 import About from './components/About/About.jsx'
@@ -45,11 +46,8 @@ const router = createBrowserRouter([
         element: <ProtectedRoute><UpdateProfile></UpdateProfile></ProtectedRoute>,
       },
       {
-        path: "/profile",
-        element: <ProtectedRoute><UserProfile></UserProfile></ProtectedRoute>,
-      },
-      {
         path: "/favourite",
+        loader:()=>fetch('/data.json'),
         element: <ProtectedRoute><Favourite></Favourite></ProtectedRoute>,
       },
       {
@@ -65,5 +63,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <AuthProvider>
       <RouterProvider router={router} />
     </AuthProvider>
+    <ToastContainer />
   </React.StrictMode>,
 )

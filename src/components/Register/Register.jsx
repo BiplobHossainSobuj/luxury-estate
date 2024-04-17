@@ -1,11 +1,13 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
 import { updateProfile } from 'firebase/auth';
+import { FaEye,FaEyeSlash  } from "react-icons/fa";
 
 const Register = () => {
     const authInfo = useContext(AuthContext);
     const { user, createUser } = authInfo;
+    const [showPassword,setShowPassword] = useState(false);
     const handleRegister = (e) => {
         e.preventDefault();
         const form = new FormData(e.currentTarget);
@@ -52,7 +54,8 @@ const Register = () => {
                     <label className="label">
                         <span className="label-text">Password</span>
                     </label>
-                    <input type="password" name='password' placeholder="password" className="input input-bordered" required />
+                    <input type={showPassword?"text":"password"} name='password' placeholder="password" className="input input-bordered" required />
+                    <span className='relative bottom-8 left-96' onClick={()=>setShowPassword(!showPassword)}>{showPassword?<FaEyeSlash />:<FaEye />}</span>
                 </div>
                 <div>
                     <label className="label">

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../context/AuthProvider';
-
+import { toast } from 'react-toastify';
+import { Helmet } from "react-helmet";
 const UpdateProfile = () => {
     const authInfo = useContext(AuthContext);
     const { user, updateUser } = authInfo;
@@ -12,14 +13,17 @@ const UpdateProfile = () => {
         const photoUrl = form.get('photo');
         console.log(name, email, photoUrl);
         updateUser(name,photoUrl)
-            .then(res => {
-                console.log(res.user);
-            })
-
+            .then(() => {
+                toast("Wow Your profile is updated!");
+            })  
     }
 
     return (
         <div className=" max-w-lg mx-auto bg-base-200">
+            <Helmet>
+                <title>Profile Update</title>
+                <meta name="description" content="Helmet application" />
+            </Helmet>
             <form onSubmit={handleUpdate} className="card-body">
                 <div className="form-control">
                     <label className="label">

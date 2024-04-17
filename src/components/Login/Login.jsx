@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
 import { FaGoogle, FaGithub } from "react-icons/fa";
+import { toast } from 'react-toastify';
 
 const Login = () => {
     const authInfo = useContext(AuthContext);
@@ -20,6 +21,7 @@ const Login = () => {
             })
             .catch(err => {
                 console.log(err);
+                toast("something is wrong");
             })
     }
     const handleGoogleLogin = () => {
