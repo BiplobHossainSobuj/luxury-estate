@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
 import { updateProfile } from 'firebase/auth';
 import { FaEye,FaEyeSlash  } from "react-icons/fa";
+import { toast } from 'react-toastify';
 
 const Register = () => {
     const authInfo = useContext(AuthContext);
@@ -16,12 +17,24 @@ const Register = () => {
         const photoUrl = form.get('photo');
         const password = form.get('password');
         console.log(name, email, photoUrl, password);
+        if (password.length<6) {
+            toast('Password must be 6 characters or longer');
+            return
+        }
+        else if (!/[A-Z]/.test(password)) {
+            toast('Password should have one uppercase latter');
+            return
+        }
+        else if (!/[a-z]/.test(password)) {
+            toast('Password should have one lowercase latter');
+            return
+        }
         createUser(email, password,name,photoUrl)
             .then(res => {
                 updateProfile(res.user,{
                     displayName: name, photoURL: photoUrl
                 })
-                console.log(res.user);
+                toast('Registration successfull')
 
             })
             .catch(err => {
